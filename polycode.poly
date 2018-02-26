@@ -27,7 +27,7 @@ print("this is a frame not associated with a particular kernel")
 
 You can import variables by doing:
 
-<R import="kernel1: [data]; shell1: [a]">
+<R kernel="R1" import="shell1: [a]">
 plot(data);
 title(a);
 </R>
