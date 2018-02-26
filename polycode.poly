@@ -1,0 +1,43 @@
+<kerneldef language="python" name="python1" executable="/usr/bin/env python">
+<kerneldef language="R" name="R1" executable="/usr/bin/env /R">
+<kerneldef language="bash" name="shell1" executable="/bin/bash">
+
+<markdown>
+This section can be markdown.
+<inline kernel="python1">print(a)</inline>
+</markdown>
+
+<html>
+This section contains html and even
+  <javascript>
+    embedded scripts
+  </javascript>
+as well as <inline kernel="R1">cat("hello")</inline>
+
+or other inline code <inline kernel="shell1">a="hello"; echo "$a"</inline>
+</html>
+
+Anything outside of a defined block is a comment.
+
+Quick code blocks can be made by.
+
+<python>
+print("this is a frame not associated with a particular kernel")
+</python>
+
+You can import variables by doing:
+
+<R import="kernel1: [data]; shell1: [a]">
+plot(data);
+title(a);
+</R>
+
+Import equivalencies can be defined:
+
+data.table ==> DataFrame
+int ==> int
+Array ==> List
+Dict ==> Object (JSON)
+etc.
+
+Need definition scheme.
