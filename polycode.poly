@@ -27,17 +27,18 @@ print("this is a frame not associated with a particular kernel")
 
 You can import variables by doing:
 
-<R kernel="R1" import="shell1: [a]">
+<R kernel="R1" import="shell1: [a, var1], python1: [data]">
 plot(data);
 title(a);
 </R>
 
 Import equivalencies can be defined:
 
-data.table ==> DataFrame
-int ==> int
-Array ==> List
-Dict ==> Object (JSON)
+data.table <==> DataFrame (Python), Object (JS), TSV (bash)
+string <==> string
+int <==> int
+Array <==> List, Array, etc.
+Dict <==> JS object (JS), nested named lists (R), YAML, XML
 etc.
 
 Need definition scheme.
