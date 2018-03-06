@@ -1,0 +1,151 @@
+Import KernelManager as km
+
+python1 = km(language=’Python’)
+bash1 = km(language=’bash’)
+R1 = km(language=’R’)
+
+python1.start()
+bash1.start()
+R1.start()
+
+cmd = """awk 'NR==1{print "A","D","E"}NR>3&&NR%2==0{print $1,$2*$3}' data.txt > new_data.txt"""
+out = bash1.run(cmd)
+
+cmd = """
+import pandas as pd
+df = pd.read_csv("new_data.txt", sep="\t")
+"""
+out = python1.run(cmd)
+
+
+
+df = pd.DataFrame({'Alphabet': ['a', 'b', 'c', 'd','e', 'f', 'g', 'h','i'],
+                   'A': [4, 3, 5, 2, 1, 7, 7, 5, 9],
+                   'B': [0, 4, 3, 6, 7, 10,11, 9, 13],
+                   'C': [1, 2, 3, 1, 2, 3, 1, 2, 3]})
+# Take the name of input variable df and assign it to an R variable of the same name
+%%R -i df
+# Plot the DataFrame df
+ggplot(data=df) + geom_point(aes(x=A, y=B, color=C))
+
+
+
+
+
+
+
+
+
+import pandas as pd
+df = pd.DataFrame({
+    'cups_of_coffee': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    'productivity': [2, 5, 6, 8, 9, 8, 0, 1, 0, -1]
+})
+
+# import df from global environment
+# make default figure size 5 by 5 inches with 200 dpi resolution
+%%R -i df -w 5 -h 5 --units in -r 200
+install.packages("ggplot2", repos='http://cran.us.r-project.org', quiet=TRUE)
+library(ggplot2)
+ggplot(df, aes(x=cups_of_coffee, y=productivity)) + geom_line()
+
+
+# Hide warnings if there are any
+import warnings
+warnings.filterwarnings('ignore')
+# Load in the r magic
+%load_ext rpy2.ipython
+# We need ggplot2
+%R require(ggplot2)
+# Load in the pandas library
+import pandas as pd
+# Make a pandas DataFrame
+df = pd.DataFrame({'Alphabet': ['a', 'b', 'c', 'd','e', 'f', 'g', 'h','i'],
+                   'A': [4, 3, 5, 2, 1, 7, 7, 5, 9],
+                   'B': [0, 4, 3, 6, 7, 10,11, 9, 13],
+                   'C': [1, 2, 3, 1, 2, 3, 1, 2, 3]})
+# Take the name of input variable df and assign it to an R variable of the same name
+%%R -i df
+# Plot the DataFrame df
+ggplot(data=df) + geom_point(aes(x=A, y=B, color=C))
+
+
+
+
+
+
+
+import numpy as np
+x = np.array([2.3,-4.5,10.01])
+x.mean()
+
+%%R -i x -o m
+m = mean(x)
+
+print(m)
+
+
+a=10
+b=20
+
+%%bash -s $a $b --out c
+echo "this is displayed"
+echo "the last thing printed to stdout will be passed back in the variable c"
+echo "a + b = $(($1+$2))"
+
+print(c)
+
+
+In [1]:
+%load_ext rpy2.ipython
+In [2]:
+a = !echo "hello"
+print(a)
+['hello']
+In [3]:
+import numpy as np
+x = np.array([2.3,-4.5,10.01])
+x.mean()
+Out[3]:
+2.6033333333333331
+In [4]:
+%%R -i x -o m
+m = mean(x)
+In [5]:
+print(m)
+[ 2.60333333]
+In [50]:
+a=10
+b=20
+In [51]:
+%%bash -s $a $b --out c
+echo "this is displayed"
+echo "the last thing printed to stdout will be passed back in the variable c"
+echo "a + b = $(($1+$2))"
+In [52]:
+print(c)
+this is displayed
+the last thing printed to stdout will be passed back in the variable c
+a + b = 30
+
+In [ ]:
+
+
+
+
+>>> df = pd.read_csv(StringIO("A,B,C\n1,2,3\n4,5,6"))
+>>> df
+   A  B  C
+0  1  2  3
+1  4  5  6
+>>>
+
+
+
+
+
+
+
+https://github.com/michhar/rpy2_sample_notebooks
+https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook
+https://www.datacamp.com/community/blog/jupyter-notebook-r
