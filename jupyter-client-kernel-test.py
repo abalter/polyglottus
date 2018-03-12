@@ -46,6 +46,8 @@ if __name__ == "__main__":
     ]
 
     for command in commands:
-        out = bkc.execute_interactive(code=command)
+        #msg_id = bkc.execute(command)
+        #reply = bkc.get_shell_msg(msg_id)
+        print(reply)
 #        run_code(bkc, comman)
 
