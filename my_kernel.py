@@ -1,14 +1,14 @@
 from jupyter_client import KernelManager
 import queue
 from jupyter_client.manager import run_kernel
+from jupyter_client.manager import start_new_kernel
+
 
 class MyKernel():
     def __init__(self):
-        kernel = KernelManager()
-        kernel.start_kernel()
-        self.client = kernel.client()
-
-        #self.client = run_kernel()
+        self.kernel_manager, self.client = start_new_kernel()
+        self.client.start_channels
+        #self.client.wait_for_ready()
 
     def run_code(self, code):
         print("----------------")
@@ -16,9 +16,9 @@ class MyKernel():
 
         msg_id = self.client.execute(code)
         reply = self.client.get_shell_msg(msg_id)
-        print("printing reply content")
-        print(reply['content'])
-        print()
+        #print("printing reply content")
+        #print(reply['content'])
+        #print()
 
         while True:
             try:
@@ -30,3 +30,6 @@ class MyKernel():
                 break
 
         print("----------------\n\n")
+
+    def __del__(self):
+        self.kernel_manager.shutdown_kernel()
