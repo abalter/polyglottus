@@ -119,7 +119,6 @@ class SimpleKernel():
     def __del__(self):
         """
         ## Description
-        **__del__**:
         Destructor. Shuts down kernel safely.
         """
         self.kernel_manager.shutdown_kernel()
