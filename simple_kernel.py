@@ -59,7 +59,7 @@ class SimpleKernel():
         ## Returns
         `stdout` or the full response payload.
         """
-        debug = lambda x: print(x if verbose else '')
+        debug = lambda x: print(x if verbose else '', end='')
 
         debug("----------------")
         debug("executing code: " + code)
@@ -192,7 +192,7 @@ def test():
 
     for command in commands:
         print(">>>" + command)
-        out = kernel.execute(command, verbose=False)
+        out = kernel.execute(command, verbose=True)
         if out: print(out)
 
 
