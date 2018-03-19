@@ -107,10 +107,23 @@ class SimpleKernel():
         if 'data' in temp: # Indicates completed operation
             debug('has data')
             out = temp['data']['text/plain']
+            if get_type:
+                debug("code: " + code)
+                the_type = self.execute('type(' + code + ')')
+                debug(the_type)
+                out = {out: the_type}
         elif 'name' in temp and temp['name'] == "stdout": # indicates output
             debug('name is stdout')
             out = temp['text']
-            debug("out is " + out)
+            if get_type:
+                debug("code: " + code)
+                if code.startswith('print('):
+                    the_type = "string"
+                else:
+                    the_type = self.execute('type(' + code + ')')
+                debug(the_type)
+                out = {out: the_type}
+                debug("out is " + str(out))
         elif 'traceback' in temp: # Indicates error
             print("ERROR")
             out = '\n'.join(temp['traceback']) # Put error into nice format
@@ -169,7 +182,7 @@ class SimpleKernel():
 
 
 
-def test():
+def test(verbose=False):
 
     kernel = SimpleKernel()
 
@@ -185,6 +198,11 @@ def test():
         'a*b',
         'a',
         'a+b',
+        's = "this is s"',
+        'print(s)',
+        'type(s)',
+        'type(a)',
+        'type(1.0*a)',
         'print(a+b)',
         'print(a*10)',
         'c=1/b'
@@ -192,7 +210,7 @@ def test():
 
     for command in commands:
         print(">>>" + command)
-        out = kernel.execute(command, verbose=True)
+        out = kernel.execute(command, verbose=False, get_type=True)
         if out: print(out)
 
 
