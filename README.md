@@ -45,6 +45,8 @@ I also have a working wrapper for the the `jupyter_client` that allows me to
 create Jupyter python kernels, execute code in them, and collect the responses.
 
 ## Short-Term ToDo
+- [x] Choose a format and write a parser
+- [ ] Create a parser class
 - [ ] Test creating multiple kernels and importing data from them into other kernels
 as well as Markup such as markdown and HTML.
 - [ ] Learn how to create kernels in languages other than Python.
