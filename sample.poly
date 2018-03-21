@@ -1,24 +1,24 @@
-%%kernel_defs
-python1 = kernel(language="python", executable="/usr/bin/env python")
-R1 = kernel(language="R", executable="/usr/bin/env /R")
-shell1 = kernel(language="bash", executable="/bin/bash")
-/%%
-
-%%meta
+%%poly~
+~---
 maybe other meta stuff here?
 styles? directives?
+---~
+python1 = Kernel(language="python", executable="/usr/bin/env python")
+R1 = Kernel(language="R", executable="/usr/bin/env /R")
+shell1 = Kernel(language="bash", executable="/bin/bash")
 /%%
+
 
 %%shell1
 a=10
-%%
+/%%
 
-%%markdown:
----
+%%markdown~
+~---
 stylesheet: sleek
 imports:
     a: shell1.a
----
+---~
 This section can be markdown.
 `this is normal displayed code`.
 
@@ -38,10 +38,10 @@ In `shell1`, `a` has the value ${shell.a}.
 The current directory is $bash{pwd}.
 /%%
 
-%%html>
->>>>
+%%html~
+~---
 stylesheet: style.css
-<<<<
+---~
 This section contains html and even
   <javascript>
     embedded scripts
@@ -65,8 +65,8 @@ print("this is a frame not associated with a particular kernel")
 
 You can import variables by doing:
 
-%%R1:
----
+%%R1~
+~---
 imports:
     myvar: shell1.var1
     the_title: shell1.a
@@ -74,7 +74,7 @@ imports:
 stdout: hide
 stderr: show
 graphics: inline
----
+---~
 plot(data);
 title(the_title);
 /%%

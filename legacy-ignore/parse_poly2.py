@@ -11,7 +11,7 @@ verbose = False
 #block_open_pattern = '(^%%)?[\s]?([a-zA-Z_]?[a-zA-Z0-9_]*)(:)?$'
 special_character = "~"
 block_open_pattern = '(^%%)?[\s]?([a-zA-Z_]?[a-zA-Z0-9_]*)(' + special_character + ')?$'
-block_close_pattern = '(^\/%%$)?'
+block_close_pattern = '(^\/%%$)'
 meta_open_pattern = "(^" + special_character + "-+" + ")?$"
 meta_close_pattern = "(^" + "-+" + special_character + ")?$"
 
@@ -28,9 +28,12 @@ def isBlockOpen(line):
 
 def isBlockClose(line):
     debug("in isBlockClose")
-    matches = re.findall(block_close_pattern, line)[0]
+    matches = re.findall(block_close_pattern, line)
     debug(matches)
-    return matches
+    if len(matches) > 0 and matches[0] == '/%%':
+        return True
+    else:
+        return False
 
 def isMetaOpen(line):
     debug("in isMetaOpen")
