@@ -1,4 +1,3 @@
-
 %%kernel_defs
 python1 = kernel(language="python", executable="/usr/bin/env python")
 R1 = kernel(language="R", executable="/usr/bin/env /R")

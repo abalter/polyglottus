@@ -205,12 +205,26 @@ def test(verbose=False):
         'type(1.0*a)',
         'print(a+b)',
         'print(a*10)',
-        'c=1/b'
+        'c=1/b',
+        'd = {"a":1,"b":"Two","c":[1,2,3]}',
+        'd',
+        'import json',
+        'j = json.loads(str(d).replace(\"\\\'\",\"\\"\"))',
+        'j',
+        'import pandas as pd',
+        'df = pd.DataFrame(dict(A=[1,2,3], B=["one", "two", "three"]))',
+        'df',
+        'df.describe()'
+
     ]
 
     for command in commands:
         print(">>>" + command)
-        out = kernel.execute(command, verbose=False, get_type=True)
+        out = kernel.execute(
+                command,
+                verbose=False,
+                get_type=False
+                )
         if out: print(out)
 
 
