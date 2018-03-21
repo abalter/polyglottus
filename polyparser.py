@@ -31,7 +31,11 @@ class PolyParser():
         pass
 
     def isStartMeta(self, line):
-        """checks"""
+        """checks for start meta"""
+        pass
+
+    def isEndMeta(self, line):
+        """checks for end meta"""
         pass
 
     def getNextBlock(self):

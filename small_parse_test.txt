@@ -4,8 +4,32 @@ R1 = kernel(language="R", executable="/usr/bin/env /R")
 shell1 = kernel(language="bash", executable="/bin/bash")
 /%%
 
-%%kernel_defs
-python1 = kernel(language="python", executable="/usr/bin/env python")
-R1 = kernel(language="R", executable="/usr/bin/env /R")
-shell1 = kernel(language="bash", executable="/bin/bash")
+blah
+
+%%shell1
+a=10
 /%%
+
+blah
+blah
+
+blah
+
+You can import variables by doing:
+
+%%R1~
+~---
+imports:
+    myvar: shell1.var1
+    the_title: shell1.a
+    data: python1.data
+stdout: hide
+stderr: show
+graphics: inline
+---~
+plot(data);
+title(the_title);
+/%%
+
+blah
+blah

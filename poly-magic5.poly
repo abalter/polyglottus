@@ -38,10 +38,10 @@ In `shell1`, `a` has the value ${shell.a}.
 The current directory is $bash{pwd}.
 /%%
 
-%%html:
----
+%%html>
+>>>>
 stylesheet: style.css
----
+<<<<
 This section contains html and even
   <javascript>
     embedded scripts
