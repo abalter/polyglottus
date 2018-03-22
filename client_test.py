@@ -74,3 +74,42 @@ for command in commands:
     print(">>>" + command)
     out = runCode(command)
     print(out)
+
+
+"""
+>>>!pwd
+
+>>>!echo "hello"
+"hello"
+
+>>>!ls
+
+>>>1+1
+2
+>>>a=5
+
+>>>b=0
+
+>>>print()
+
+
+>>>b
+0
+>>>print()
+
+
+>>>print("hello there")
+hello there
+
+>>>print(a*10)
+50
+
+>>>c=1/b
+ERROR
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+<ipython-input-12-47a519732db5> in <module>()
+----> 1 c=1/b
+
+ZeroDivisionError: division by zero
+"""
