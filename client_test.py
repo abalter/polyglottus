@@ -52,19 +52,6 @@ def runCode(code):
     return out
 
 
-def run_code(client, code):
-    client.execute(code)
-
-    while True:
-        try:
-            client_msg = client.get_iopub_msg(timeout=1)
-            if 'content' in client_msg and 'data' in client_msg['content']:
-                print('the kernel produced data {}'.format(client_msg['content']['data']))
-                break
-        except:
-            print('timeout client.get_iopub_msg')
-            pass
-
 
 commands = \
 [
