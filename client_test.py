@@ -1,8 +1,7 @@
 import queue
 from jupyter_client.manager import start_new_kernel
 
-kernel_manager, client = start_new_kernel()
-
+kernel_manager, client = start_new_kernel(kernel_name="bash")
 
 def runCode(code):
 
@@ -53,7 +52,7 @@ def runCode(code):
 
 
 
-commands = \
+python_commands = \
 [
     '!pwd',
     '!echo "hello"',
@@ -69,8 +68,29 @@ commands = \
     'c=1/b'
 ]
 
+R_commands = \
+[
+    'a<-5',
+    'b<-0',
+    'rnorm(5)',
+    'b',
+    'describe(cars)',
+    'print("hello there")',
+    'print(a*10)',
+    'c=1/b'
+]
 
-for command in commands:
+bash_commands = \
+[
+    'ls',
+    'pwd',
+    'echo "hello" | sed \'s/el/99/\'',
+    'a=10',
+    'echo $a'
+]
+
+
+for command in bash_commands:
     print(">>>" + command)
     out = runCode(command)
     print(out)
