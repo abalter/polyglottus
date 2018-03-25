@@ -42,7 +42,7 @@ def executeCommand(client, command):
 #                print("idle --> break")
                 break
         except queue.Empty:
-#            print("timeout get_iopub_msg")
+            print("timeout get_iopub_msg")
             break
 
         ### Check the message for various possibilities
@@ -127,8 +127,8 @@ bash_commands = \
     'a=10',
     'echo $a',
     'cat data.txt',
-    'awk -F \',\' \'NR==1{print "A","D","E"}NR>1&&NR%2==0{print $1,$4,($2*$3)}\' data.txt',
-    'awk -F \',\' \'NR==1{print "A","D","E"}NR>1&&NR%2==0{print $1,$4,($2*$3)}\' data.txt > new_data.txt',
+    'awk  \'{FS=","; OFS="\\t";} NR==1{print "A","D","E"} NR>1 && NR%2==0{print $1,$4,($2*$3)}\' data.txt',
+    'awk  \'{FS=","; OFS="\\t";} NR==1{print "A","D","E"} NR>1 && NR%2==0{print $1,$4,($2*$3)}\' data.txt > new_data.txt',
     'cat new_data.txt',
     'head -4 new_data.txt'
 ]
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         language = sys.argv[1]
     else:
-        language = 'bash'
+        language = 'python'
 
     run(language)
 
