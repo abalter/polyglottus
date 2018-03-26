@@ -30,25 +30,82 @@ exporting variables between cells, even with different kernels, is also done in 
 consistent manner (this is a feature that Jupyter lacks).
 
 ## Formats
-The `.poly` files are my attempts at a syntax. Right now the one that I like the
-best combines the _magics_ syntax from IPython/Jupyter and the Matlab cell syntax.
-To start a cell you begin a line with `%%` followed by a _processor_ and optional
-keyword arguments. My second favorite has the arguments in a YAML header similar
-to the meta section of an RMarkdown document.
+I played around with a couple of different ideas for how to delineate code blocks. 
+I've settled on a syntax hat combines the _magics_ syntax from IPython/Jupyter and 
+the Matlab cell syntax. To start a cell you begin a line with `%%` followed by a
+_processor_ name. This is the name of the kernel or other method to parse, execute,
+and/or render what is in the block. Including a `tilde` "~" directly after the processor
+name tells the parser that a section of metadata will follow (not married to the tilde,
+was just my first hit). The metadata is in YAML format and sepcifies such things as
+variables imported from other kernels, stylesheets, whether or not to display code
+and/or output, etc. A code cell is closed with `/%%`.
+
+Example:
+
+This is is ignored because it is not in a cell
+
+%%kerneldefs
+r1 = kernel(language="R", kernel_name="ir")
+p1 = kernel(languag="Python", kernel="IPython")
+m1 = kernel(language="Markedown", renderer="markdown.js")
+/%%
+
+%%r1
+a <- 10
+/%%
+
+%%m1~
+------
+imports:
+  - r1:
+      data: a
+stylesheet: sleek
+------
+This is some markdown. In the kernel _r1_ the variable
+`a` has the value {{a}}.
+/%%
+
+%%python~
+------
+imports:
+  - r1:
+      maximum: a
+------
+for i in range(maximum):
+  print(i)
+/%%
+```
+
+## Importing Data
+You will be able to import data from one kernel into another for a limited number of
+data types. For starters, these will be an extended set of the usual primitive types:
+
+> int, float, string, array, dict, table
+
+### Import equivalencies can be defined:
+
+data.table <==> DataFrame (Python), Object (JS), TSV (bash)
+string <==> string
+int <==> int
+Array <==> List, Array, etc.
+Dict <==> JS object (JS), nested named lists (R), YAML, XML
+etc.
 
 ## Status
-I currently have a working parser prototype for the #1 choice, `parse_poly.py` and
-a short test called `small_parse_test.txt`. Right now the parser can isolate code
-blocks, the processor, the keyword arguments (if present) and the code.
+I currently have a working parser class `polylparser.py` which successfully parses the
+file `sample.poly`.
 
-I also have a working wrapper for the the `jupyter_client` that allows me to
-create Jupyter python kernels, execute code in them, and collect the responses.
+I also have a working wrapper for the the `jupyter_client` in `simple_kernel.py` that 
+allows me to create kernels in multiple languages. A separate test of running code in 
+diferent kernels (currently have tested Python, R, bash, javascript, typescript, and 
+nodejs) is `multi_kernel_test.py`.
 
 ## Short-Term ToDo
 - [x] Choose a format and write a parser
-- [ ] Create a parser class
-- [ ] Test creating multiple kernels and importing data from them into other kernels
-as well as Markup such as markdown and HTML.
-- [ ] Learn how to create kernels in languages other than Python.
+- [x] Create a parser class
+- [ ] Combine `simple_kernel.py`, `polyparser.py`, and `multi_kernel_client.py` into a 
+      prototype of parsing an actual `.poly` file.
+- [x] Learn how to create kernels in languages other than Python.
 - [ ] Learn to use more of the `jupyter_client` API such as the JSON payloads
 described in the documentation.
+- [ ] 
