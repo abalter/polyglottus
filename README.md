@@ -42,6 +42,7 @@ and/or output, etc. A code cell is closed with `/%%`.
 
 Example:
 
+```
 This is is ignored because it is not in a cell
 
 %%kerneldefs
