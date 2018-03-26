@@ -62,7 +62,7 @@ imports:
 stylesheet: sleek
 ------
 This is some markdown. In the kernel _r1_ the variable
-`a` has the value {{a}}.
+\`a\` has the value {{a}}.
 /%%
 
 %%python~
