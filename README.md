@@ -85,11 +85,11 @@ data types. For starters, these will be an extended set of the usual primitive t
 
 ### Import equivalencies can be defined:
 
-data.table <==> DataFrame (Python), Object (JS), TSV (bash)
-string <==> string
-int <==> int
-Array <==> List, Array, etc.
-Dict <==> JS object (JS), nested named lists (R), YAML, XML
+data.table <==> DataFrame (Python), Object (JS), TSV (bash)    
+string <==> string    
+int <==> int    
+Array <==> List, Array, etc.    
+Dict <==> JS object (JS), nested named lists (R), YAML, XML    
 etc.
 
 ## Status
