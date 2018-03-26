@@ -72,9 +72,18 @@ imports:
   - r1:
       maximum: a
 ------
+j = 1
 for i in range(maximum):
+  j *= i
   print(i)
 /%%
+
+%%r1
+cat(a)
+/%%
+
+%%p1
+print("maximum! = " + str(j))
 ```
 
 ## Importing Data
